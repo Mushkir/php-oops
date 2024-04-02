@@ -51,7 +51,3 @@ if (isset($_POST['action']) && $_POST['action'] == "view") {
         echo '<h3 class=" text-center text-secondary ">:( No any user present in the database!</h3>';
     }
 }
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo "From insert";
-}

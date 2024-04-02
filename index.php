@@ -92,16 +92,16 @@
                 <div class="modal-body px-4 ">
                     <form action="" method="post" id="form-data">
                         <div class="form-group mb-3">
-                            <input type="text" name="fname" id="" placeholder="First Name" required class="form-control ">
+                            <input type="text" name="fname" id="fname" placeholder="First Name" required class="form-control ">
                         </div>
                         <div class="form-group mb-3">
-                            <input type="text" name="lname" id="" placeholder="Last Name" required class="form-control ">
+                            <input type="text" name="lname" id="lname" placeholder="Last Name" required class="form-control ">
                         </div>
                         <div class="form-group mb-3">
-                            <input type="email" name="email" id="" placeholder="Email" required class="form-control ">
+                            <input type="email" name="email" id="email" placeholder="Email" required class="form-control ">
                         </div>
                         <div class="form-group mb-3">
-                            <input type="tel" name="phone" id="" placeholder="Phone" required class="form-control ">
+                            <input type="tel" name="phone" id="phone" placeholder="Phone" required class="form-control ">
                         </div>
                         <div class="form-group mb-3">
                             <input type="submit" name="insert" class="btn btn-danger w-100 " value="Add User">
@@ -137,6 +137,7 @@
 
     <script>
         $(document).ready(function() {
+            // Display all users
             showAllUsers();
 
             function showAllUsers() {
@@ -151,28 +152,35 @@
                         $("#showUser").html(response);
                         $("table").DataTable();
                     }
-
-
                 })
             }
 
             // Insert JQuery
             $(document).on("submit", "#form-data", function(e) {
-
                 e.preventDefault();
 
                 $.ajax({
-
-                    url: 'action.php',
+                    url: 'insertControllerPHP.php',
                     type: 'POST',
                     processData: false,
                     contentType: false,
                     data: new FormData(this),
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
+                        Swal.fire({
+                            title: 'User added successfully!',
+                            type: 'success'
+                        });
+                        $("#addModal").hide();
+                        $("#form-data")[0].reset();
+                        showAllUsers();
+
                     }
                 })
             })
+
+
+
         })
     </script>
 
